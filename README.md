@@ -28,7 +28,7 @@ none
 
 ## Dependencies
 
-Only default modules are used. No dependencies.
+`community.general.ufw` is used which should come with ansible by default
 
 ## Example Playbook
 
