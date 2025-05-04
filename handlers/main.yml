@@ -1,0 +1,18 @@
+---
+# handlers file for role_ssh_config
+- name: Restart ssh
+  become: true
+  ansible.builtin.service:
+    name: ssh
+    state: restarted
+
+- name: Reload ufw
+  become: true
+  community.general.ufw:
+    state: reloaded
+
+- name: Reload fail2ban
+  become: true
+  ansible.builtin.service:
+    name: fail2ban
+    state: restarted

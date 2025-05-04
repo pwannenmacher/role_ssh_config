@@ -1,0 +1,33 @@
+---
+galaxy_info:
+  role_name: role_ssh_config
+  namespace: pwannenmacher
+  author: Paul Wannenmacher
+  description: Configures the ssh daemon, fail2ban and ufw for ssh access.
+  company: Wannenmacher
+
+  issue_tracker_url: https://github.com/pwannenmacher/role_ssh_config
+
+  license: MIT
+
+  min_ansible_version: "2.9"
+
+  platforms:
+    - name: Ubuntu
+      versions:
+        - xenial
+        - bionic
+        - focal
+        - jammy
+    - name: Debian
+      versions:
+        - stretch
+        - buster
+        - bullseye
+
+  galaxy_tags:
+    - ssh
+    - ubuntu
+    - debian
+
+dependencies: []
