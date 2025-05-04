@@ -141,7 +141,7 @@
 - name: Enable fail2ban
   ansible.builtin.service:
     name: fail2ban
-    enabled: {{ fail2ban_enabled }}
+    enabled: "{{ fail2ban_enabled }}"
 
 - name: Copy fail2ban ssh conf
   ansible.builtin.template:
