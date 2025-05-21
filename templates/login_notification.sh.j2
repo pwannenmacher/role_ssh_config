@@ -1,0 +1,23 @@
+#!/bin/bash
+# add to /sbin/ and make executable
+# edit /etc/pam.d/sshd and add:
+# session   optional   pam_exec.so /sbin/sshd-login
+# to bottom of the file
+# https://blog.alexsguardian.net/posts/2022/07/02/loggingsshtodiscord/
+
+WEBHOOK_URL="{{ ssh_login_notification_webhook_url }}"
+
+# Capture only open and close sessions.
+case "$PAM_TYPE" in
+    open_session)
+        PAYLOAD={{ ssh_login_notification_message}}
+        ;;
+    close_session)
+        PAYLOAD={{ ssh_logout_notification_message }}
+        ;;
+esac
+
+# If payload exists fire webhook
+if [ -n "$PAYLOAD" ] ; then
+    {{ ssh_login_notification_curl_command }}
+fi

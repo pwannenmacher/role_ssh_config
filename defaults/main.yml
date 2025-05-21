@@ -15,3 +15,15 @@ ssh_challenge_response_authentication: "no"
 ufw_enabled: false
 fail2ban_enabled: false
 ssh_fail2ban_enabled: false
+ssh_login_notification_enabled: false
+ssh_login_notification_curl_command: "curl -H \"Markdown: yes\" -d \"$PAYLOAD\" \"$WEBHOOK_URL\""
+ssh_login_notification_message: |
+  "# SSH-Login - $HOSTNAME
+
+  User: $PAM_USER
+  Remote host: $PAM_RHOST"
+ssh_logout_notification_message: |
+  "# SSH-Logout - $HOSTNAME
+
+  User: $PAM_USER
+  Remote host: $PAM_RHOST"
