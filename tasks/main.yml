@@ -171,7 +171,7 @@
     owner: root
     mode: "744"
   when: ssh_login_notification_enabled | bool and ssh_login_notification_webhook_url is defined
-  notify: Restart ssh 
+  notify: Restart ssh
 
 - name: Add ssh login notification to PAM
   ansible.builtin.lineinfile:
