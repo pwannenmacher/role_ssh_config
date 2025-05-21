@@ -181,5 +181,20 @@
   when: ssh_login_notification_enabled | bool and ssh_login_notification_webhook_url is defined
   notify: Restart ssh
 
+- name: Remove Login-Notification
+  ansible.builtin.file:
+    path: /sbin/sshd-login
+    state: absent
+  when: not (ssh_login_notification_enabled | bool) or ssh_login_notification_webhook_url is not defined
+  notify: Restart ssh
+
+- name: Remove ssh login notification from PAM
+  ansible.builtin.lineinfile:
+    path: /etc/pam.d/sshd
+    line: "session   optional   pam_exec.so /sbin/sshd-login"
+    state: absent
+  when: not (ssh_login_notification_enabled | bool) or ssh_login_notification_webhook_url is not defined
+  notify: Restart ssh
+
 - name: Flush Handlers
   ansible.builtin.meta: flush_handlers
