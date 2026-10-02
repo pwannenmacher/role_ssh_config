@@ -1,10 +1,20 @@
 ---
 # handlers file for role_ssh_config
-- name: Restart ssh
+# Never restart sshd with an invalid configuration: a failed restart leaves
+# sshd stopped and the host unreachable. Both handlers listen to the same
+# topic and run in this order; a failed check skips the restart.
+- name: Check sshd configuration
+  become: true
+  ansible.builtin.command: /usr/sbin/sshd -t
+  changed_when: false
+  listen: Restart ssh
+
+- name: Restart sshd service
   become: true
   ansible.builtin.service:
     name: ssh
     state: restarted
+  listen: Restart ssh
 
 - name: Reload ufw
   become: true

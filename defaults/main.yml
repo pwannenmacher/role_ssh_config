@@ -10,7 +10,7 @@ ssh_max_auth_tries: 10
 ssh_allow_tcp_forwarding: "no"
 ssh_allow_agent_forwarding: "no"
 ssh_authorized_keys_file: .ssh/authorized_keys
-ssh_pubkey_authentication: "true"
+ssh_pubkey_authentication: "yes"
 ssh_challenge_response_authentication: "no"
 ufw_enabled: false
 fail2ban_enabled: false
@@ -18,7 +18,7 @@ ssh_fail2ban_enabled: false
 # Match blocks appended to sshd_config, see README for an example
 ssh_match_blocks: []
 ssh_login_notification_enabled: false
-ssh_login_notification_curl_command: "curl -H \"Markdown: true\" -d \"$PAYLOAD\" \"$WEBHOOK_URL\""
+ssh_login_notification_curl_command: "curl -H \"Markdown: yes\" -d \"$PAYLOAD\" \"$WEBHOOK_URL\""
 ssh_login_notification_message: |
   "# SSH-Login - $HOSTNAME
 
